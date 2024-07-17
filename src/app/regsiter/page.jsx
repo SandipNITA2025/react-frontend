@@ -25,8 +25,15 @@ const Register = () => {
     dateInput.setAttribute("placeholder", "Enter date of birth");
   };
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!emailRegex.test(email)) {
+      console.log("Invalid email format");
+      return;
+    }
 
     try {
       const response = await axios.post(`${baseUrl}/api/register`, {
